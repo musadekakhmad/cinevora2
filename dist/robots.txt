@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /movie/
+Allow: /tv/
+Disallow: /stream/
+Disallow: /trailer/
+
+Sitemap: https://cinevora.pages.dev/sitemap.xml

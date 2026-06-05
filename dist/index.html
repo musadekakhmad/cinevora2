@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  
+  <meta name="google-site-verification" content="F16LoIDjsVwdk04ujAz7C_OW47FDSvDAc7UeMefDiIc" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <title>Cinevora - Watch Movies & Streaming TV Shows Online</title>
+  <meta name="description" content="Cinevora - Watch free movies and TV shows online. No signup required. HD quality streaming.">
+  <meta name="keywords" content="watch movies online, free streaming, watch TV shows, movie streaming">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cinevora.pages.dev/">
+  <meta property="og:title" content="Cinevora - Free Streaming">
+  <meta property="og:description" content="Watch free movies and TV shows online in HD quality. No signup required.">
+  <meta property="og:image" content="https://live.staticflickr.com/65535/55296812359_eee20011a7_b.jpg">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cinevora - Free Streaming">
+  <meta name="twitter:description" content="Watch free movies and TV shows online in HD quality.">
+  <meta name="twitter:image" content="https://live.staticflickr.com/65535/55296812359_eee20011a7_b.jpg">
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #0a0a0a; 
+      color: white;
+      overflow-x: hidden;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: #141414;
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e50914, #b81b24);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      cursor: pointer;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-item {
+      cursor: pointer;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-item:hover { color: #e50914; }
+    
+    /* Dropdown */
+    .dropdown { position: relative; }
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #141414;
+      border-radius: 8px;
+      padding: 0.75rem;
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+      z-index: 100;
+      border: 1px solid #333;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-group { margin-bottom: 0.75rem; }
+    .dropdown-label { 
+      font-size: 0.75rem; 
+      color: white;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .dropdown-item {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #e5e5e5;
+      transition: all 0.2s;
+    }
+    .dropdown-item:hover {
+      background: #e50914;
+      border-radius: 4px;
+      color: white;
+    }
+    .genre-scroll { max-height: 250px; overflow-y: auto; }
+    
+    /* Search */
+    .search-box {
+      margin-left: auto;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-box input {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      border: 1px solid #333;
+      background: #1f1f1f;
+      color: white;
+      width: 220px;
+    }
+    .search-box button {
+      background: #e50914;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+    
+    /* Banner */
+    .banner-container {
+      text-align: center;
+      margin: 1rem auto;
+      padding: 0.5rem;
+      background: #0f0f0f;
+      border-radius: 8px;
+    }
+    .ad-label {
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    @media (max-width: 768px) {
+      .banner-container { display: none; }
+    }
+    
+    /* Page Title */
+    .page-title {
+      padding: 1rem 2rem 0rem 2rem;
+      font-size: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    /* Movie Grid - 9 posters per row */
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 1rem;
+      padding: 1rem 2rem 1.5rem 2rem;
+      justify-items: center;
+      align-items: start;
+    }
+    
+    /* Native Ad */
+    .native-ad {
+      grid-column: span 9;
+      text-align: center;
+      margin: 1rem 0;
+      padding: 0.75rem;
+      background: #141414;
+      border-radius: 12px;
+      border: 1px solid #2a2a2a;
+    }
+    
+    @media (max-width: 1400px) {
+      .movie-grid { grid-template-columns: repeat(7, 1fr); }
+      .native-ad { grid-column: span 7; }
+    }
+    @media (max-width: 1100px) {
+      .movie-grid { grid-template-columns: repeat(5, 1fr); }
+      .native-ad { grid-column: span 5; }
+    }
+    @media (max-width: 768px) {
+      .movie-grid { grid-template-columns: repeat(3, 1fr); padding: 1rem; }
+      .native-ad { grid-column: span 3; }
+      .navbar { flex-direction: column; align-items: stretch; }
+      .search-box { margin-left: 0; }
+      .search-box input { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .movie-grid { grid-template-columns: repeat(2, 1fr); }
+      .native-ad { grid-column: span 2; }
+    }
+    
+    /* Card */
+    .card {
+      background: #1f1f1f;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+      width: 100%;
+    }
+    .card:hover { transform: scale(1.05); }
+    .card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+    }
+    .card-info {
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-info div:last-child {
+      font-size: 0.7rem;
+      color: #aaa;
+    }
+    
+    /* Load More */
+    .load-more {
+      text-align: center;
+      padding: 2rem;
+    }
+    .load-more button {
+      background: #e50914;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    /* Detail Page */
+    .detail-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #0a0a0a;
+      border-top: 1px solid #222;
+      margin-top: 3rem;
+      padding: 3rem 2rem 1rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-section h3, .footer-section h4 { color: #e50914; margin-bottom: 1rem; }
+    .footer-section ul { list-style: none; padding: 0; }
+    .footer-section ul li a { color: #aaa; text-decoration: none; }
+    .footer-section ul li a:hover { color: #e50914; }
+    .social-links { display: flex; gap: 1rem; margin-bottom: 1rem; }
+    .social-links a { color: #aaa; font-size: 1.5rem; }
+    .social-links a:hover { color: #e50914; }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #222; color: #666; font-size: 0.8rem; }
+    
+    /* Floating Social Bar */
+    .floating-social {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    @media (max-width: 768px) {
+      .floating-social { bottom: 10px; right: 10px; transform: scale(0.8); }
+    }
+  
+    /* Skeleton Loader */
+    .skeleton-card {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Related Cards */
+    .related-card {
+      transition: transform 0.2s;
+      min-width: 120px;
+    }
+
+    .related-card:hover {
+      transform: scale(1.05);
+    }
+
+    /* Back to Top Button */
+    #backToTop {
+      transition: opacity 0.3s, transform 0.2s;
+    }
+
+    #backToTop:hover {
+      transform: scale(1.1);
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-C-fSgYCB.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  
+  <div id="socialBarContainer" style="display: none;"></div>
+  
+
+</body>
+</html>
